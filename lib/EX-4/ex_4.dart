@@ -77,6 +77,16 @@ class _ScoreCardState extends State<ScoreCard> {
     });
   }
 
+  Color get _progressColor {
+    if (_score <= 3) {
+      return const Color(0xFF81C784); // Light green for low scores (1-3)
+    } else if (_score <= 7) {
+      return const Color(0xFF66BB6A); // Medium green for medium scores (4-7)
+    } else {
+      return const Color(0xFF2E7D32); // Dark green for high scores (8-10)
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final double widthFactor = _score / _maxScore;
@@ -138,7 +148,7 @@ class _ScoreCardState extends State<ScoreCard> {
                     widthFactor: widthFactor.clamp(0, 1),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFF4CAF50),
+                        color: _progressColor,
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
